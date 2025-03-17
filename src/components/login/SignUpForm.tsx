@@ -3,32 +3,32 @@ import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Eye, EyeOff, Facebook, Mail } from "lucide-react";
+import { Eye, EyeOff, Mail, User, Lock, Facebook } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface LoginFormProps {
-  onLogin?: (email: string, password: string, remember: boolean) => void;
-  onForgotPassword?: () => void;
-  onSocialLogin?: (provider: "google" | "facebook") => void;
-  onSignUpClick?: () => void;
+interface SignUpFormProps {
+  onSignUp?: (
+    name: string,
+    email: string,
+    password: string,
+    agreeTerms: boolean,
+  ) => void;
+  onSocialSignUp?: (provider: "google" | "facebook") => void;
+  onBackToLogin?: () => void;
 }
 
-const LoginForm = ({
-  onLogin = () => {},
-  onForgotPassword = () => {},
-  onSocialLogin = () => {},
-  onSignUpClick = () => {},
-}: LoginFormProps) => {
+const SignUpForm = ({
+  onSignUp = () => {},
+  onSocialSignUp = () => {},
+  onBackToLogin = () => {},
+}: SignUpFormProps) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [agreeTerms, setAgreeTerms] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -37,22 +37,28 @@ const LoginForm = ({
     setIsLoading(true);
     setError("");
 
+    if (password !== confirmPassword) {
+      setError("Mật khẩu không khớp");
+      setIsLoading(false);
+      return;
+    }
+
     // Simulate API call
     setTimeout(() => {
-      onLogin(email, password, remember);
+      onSignUp(name, email, password, agreeTerms);
       setIsLoading(false);
     }, 1000);
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleSignUp = () => {
     setIsLoading(true);
-    onSocialLogin("google");
+    onSocialSignUp("google");
     setIsLoading(false);
   };
 
-  const handleFacebookLogin = () => {
+  const handleFacebookSignUp = () => {
     setIsLoading(true);
-    onSocialLogin("facebook");
+    onSocialSignUp("facebook");
     setIsLoading(false);
   };
 
@@ -70,10 +76,10 @@ const LoginForm = ({
         className="text-center"
       >
         <h2 className="mt-3 text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-          Đăng Nhập
+          Đăng Ký
         </h2>
         <p className="mt-2 text-base text-gray-600 font-medium">
-          Chào mừng quay trở lại với P&T Store
+          Tạo tài khoản mới tại P&T Store
         </p>
       </motion.div>
 
@@ -83,14 +89,38 @@ const LoginForm = ({
         </div>
       )}
 
-      <form className="mt-6 space-y-6" onSubmit={handleSubmit}>
-        <div className="space-y-5">
+      <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
+        <div className="space-y-4">
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Họ và tên
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <User className="h-5 w-5 text-gray-400" />
+              </div>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200"
+                placeholder="Nhập họ và tên"
+              />
+            </div>
+          </div>
+
           <div>
             <label
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Email hoặc tên đăng nhập
+              Email
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -99,12 +129,12 @@ const LoginForm = ({
               <Input
                 id="email"
                 name="email"
-                type="text"
+                type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200"
-                placeholder="Nhập email hoặc tên đăng nhập"
+                placeholder="Nhập địa chỉ email"
               />
             </div>
           </div>
@@ -117,6 +147,9 @@ const LoginForm = ({
               Mật khẩu
             </label>
             <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Lock className="h-5 w-5 text-gray-400" />
+              </div>
               <Input
                 id="password"
                 name="password"
@@ -124,7 +157,7 @@ const LoginForm = ({
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200"
+                className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200"
                 placeholder="Nhập mật khẩu"
               />
               <button
@@ -140,47 +173,84 @@ const LoginForm = ({
               </button>
             </div>
           </div>
+
+          <div>
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Xác nhận mật khẩu
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Lock className="h-5 w-5 text-gray-400" />
+              </div>
+              <Input
+                id="confirmPassword"
+                name="confirmPassword"
+                type={showConfirmPassword ? "text" : "password"}
+                required
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200"
+                placeholder="Xác nhận mật khẩu"
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <Checkbox
-              id="remember-me"
-              checked={remember}
-              onCheckedChange={(checked) => setRemember(checked === true)}
-              className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
-            />
-            <label
-              htmlFor="remember-me"
-              className="ml-2 block text-sm text-gray-700"
+        <div className="flex items-center">
+          <Checkbox
+            id="agree-terms"
+            checked={agreeTerms}
+            onCheckedChange={(checked) => setAgreeTerms(checked === true)}
+            className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+          />
+          <label
+            htmlFor="agree-terms"
+            className="ml-2 block text-sm text-gray-700"
+          >
+            Tôi đồng ý với{" "}
+            <a
+              href="#"
+              className="text-pink-600 hover:text-pink-500 hover:underline"
             >
-              Nhớ mật khẩu
-            </label>
-          </div>
-
-          <div className="text-sm">
-            <button
-              type="button"
-              onClick={onForgotPassword}
-              className="font-medium text-pink-600 hover:text-pink-500 focus:outline-none hover:underline transition duration-200"
+              Điều khoản dịch vụ
+            </a>{" "}
+            và{" "}
+            <a
+              href="#"
+              className="text-pink-600 hover:text-pink-500 hover:underline"
             >
-              Quên mật khẩu?
-            </button>
-          </div>
+              Chính sách bảo mật
+            </a>
+          </label>
         </div>
 
         <div>
           <Button
             type="submit"
-            disabled={isLoading}
+            disabled={isLoading || !agreeTerms}
             className={cn(
               "w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white",
               "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700",
               "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500",
               "transition-all duration-300 transform hover:translate-y-[-1px] hover:shadow-lg",
+              !agreeTerms && "opacity-70 cursor-not-allowed",
             )}
           >
-            {isLoading ? "Đang xử lý..." : "Đăng nhập"}
+            {isLoading ? "Đang xử lý..." : "Đăng ký"}
           </Button>
         </div>
       </form>
@@ -192,7 +262,7 @@ const LoginForm = ({
           </div>
           <div className="relative flex justify-center text-sm">
             <span className="px-2 bg-white text-gray-500">
-              Hoặc đăng nhập với
+              Hoặc đăng ký với
             </span>
           </div>
         </div>
@@ -200,7 +270,7 @@ const LoginForm = ({
         <div className="mt-6 grid grid-cols-2 gap-3">
           <Button
             type="button"
-            onClick={handleGoogleLogin}
+            onClick={handleGoogleSignUp}
             className="w-full inline-flex justify-center py-2.5 px-4 border border-gray-200 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-600 hover:bg-gray-50 hover:shadow transition-all duration-200"
             variant="outline"
           >
@@ -217,7 +287,7 @@ const LoginForm = ({
 
           <Button
             type="button"
-            onClick={handleFacebookLogin}
+            onClick={handleFacebookSignUp}
             className="w-full inline-flex justify-center py-2.5 px-4 border border-gray-200 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-600 hover:bg-gray-50 hover:shadow transition-all duration-200"
             variant="outline"
           >
@@ -228,25 +298,16 @@ const LoginForm = ({
       </div>
 
       <div className="text-center mt-4 text-sm text-gray-600">
-        Chưa có tài khoản?{" "}
+        Đã có tài khoản?{" "}
         <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log("Sign up button clicked");
-            if (onSignUpClick) {
-              onSignUpClick();
-            }
-          }}
-          className="font-medium text-pink-600 hover:text-pink-500 hover:underline transition-colors duration-200 focus:outline-none cursor-pointer"
-          data-testid="signup-button"
+          onClick={onBackToLogin}
+          className="font-medium text-pink-600 hover:text-pink-500 hover:underline transition-colors duration-200 focus:outline-none"
         >
-          Đăng ký ngay
+          Đăng nhập
         </button>
       </div>
     </motion.div>
   );
 };
 
-export default LoginForm;
+export default SignUpForm;
