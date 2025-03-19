@@ -16,14 +16,14 @@ interface LoginFormProps {
   onLogin?: (email: string, password: string, remember: boolean) => void;
   onForgotPassword?: () => void;
   onSocialLogin?: (provider: "google" | "facebook") => void;
-  onSignUpClick?: () => void;
+  onSignupClick?: () => void;
 }
 
 const LoginForm = ({
   onLogin = () => {},
   onForgotPassword = () => {},
   onSocialLogin = () => {},
-  onSignUpClick = () => {},
+  onSignupClick = () => {},
 }: LoginFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,7 +61,7 @@ const LoginForm = ({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="w-full h-full items-center max-w-md p-6 sm:p-8 space-y-6 bg-white rounded-2xl shadow-2xl border border-gray-100 backdrop-blur-sm bg-opacity-95"
+      className="w-full items-center max-w-md p-6 sm:p-8  bg-white rounded-2xl shadow-2xl border border-gray-100 backdrop-blur-sm bg-opacity-95 h-[525px]"
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -69,7 +69,7 @@ const LoginForm = ({
         transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
         className="text-center"
       >
-        <h2 className="mt-3 text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+        <h2 className="text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
           Đăng Nhập
         </h2>
         <p className="mt-2 text-base text-gray-600 font-medium">
@@ -83,7 +83,7 @@ const LoginForm = ({
         </div>
       )}
 
-      <form className="mt-6 space-y-6" onSubmit={handleSubmit}>
+      <form className="mt-4 space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-5">
           <div>
             <label
@@ -185,7 +185,7 @@ const LoginForm = ({
         </div>
       </form>
 
-      <div className="mt-6">
+      <div className="mt-4">
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-200"></div>
@@ -197,7 +197,7 @@ const LoginForm = ({
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-3">
+        <div className="mt-4 grid grid-cols-2 gap-3">
           <Button
             type="button"
             onClick={handleGoogleLogin}
@@ -231,16 +231,8 @@ const LoginForm = ({
         Chưa có tài khoản?{" "}
         <button
           type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log("Sign up button clicked");
-            if (onSignUpClick) {
-              onSignUpClick();
-            }
-          }}
-          className="font-medium text-pink-600 hover:text-pink-500 hover:underline transition-colors duration-200 focus:outline-none cursor-pointer"
-          data-testid="signup-button"
+          onClick={onSignupClick}
+          className="font-medium text-pink-600 hover:text-pink-500 hover:underline transition-colors duration-200"
         >
           Đăng ký ngay
         </button>

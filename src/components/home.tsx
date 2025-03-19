@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import LoginForm from "./login/LoginForm";
+import SignupForm from "./login/SignupForm";
 import ProductShowcase from "./login/ProductShowcase";
 import ForgotPasswordModal from "./login/ForgotPasswordModal";
+import FlipCard from "./login/FlipCard";
 
 const Home = () => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const handleLogin = (email: string, password: string, remember: boolean) => {
     console.log("Login attempt:", { email, password, remember });
     // Implement actual login logic here
+  };
+
+  const handleSignup = (name: string, email: string, password: string) => {
+    console.log("Signup attempt:", { name, email, password });
+    // Implement actual signup logic here
   };
 
   const handleForgotPassword = () => {
@@ -28,6 +36,14 @@ const Home = () => {
   const handleSocialLogin = (provider: "google" | "facebook") => {
     console.log(`Social login with ${provider}`);
     // Implement actual social login logic here
+  };
+
+  const handleFlipToSignup = () => {
+    setIsFlipped(true);
+  };
+
+  const handleFlipToLogin = () => {
+    setIsFlipped(false);
   };
 
   return (
@@ -95,13 +111,27 @@ const Home = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full lg:w-2/5 flex justify-end items-center"
+            className="w-full lg:w-2/5 flex justify-center items-start"
           >
-            <LoginForm
-              onLogin={handleLogin}
-              onForgotPassword={handleForgotPassword}
-              onSocialLogin={handleSocialLogin}
-            />
+            <div className="w-full max-w-md">
+              <FlipCard
+                isFlipped={isFlipped}
+                frontContent={
+                  <LoginForm
+                    onLogin={handleLogin}
+                    onForgotPassword={handleForgotPassword}
+                    onSocialLogin={handleSocialLogin}
+                    onSignupClick={handleFlipToSignup}
+                  />
+                }
+                backContent={
+                  <SignupForm
+                    onSignup={handleSignup}
+                    onBackToLogin={handleFlipToLogin}
+                  />
+                }
+              />
+            </div>
           </motion.div>
         </div>
       </div>
