@@ -129,7 +129,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({
       </div>
 
       {/* Navigation buttons */}
-      <div className="absolute inset-0 flex items-center justify-between p-4">
+      <div className="absolute inset-0 flex items-center justify-between p-4 h-[525px]">
         <button
           onClick={handlePrevious}
           className="p-3 text-white bg-black/40 rounded-full backdrop-blur-sm hover:bg-black/60 transition-all duration-300 transform hover:scale-110 shadow-lg"

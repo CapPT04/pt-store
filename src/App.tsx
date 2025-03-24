@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { useRoutes, Routes, Route } from "react-router-dom";
 import Home from "./components/home";
+import HomePage from "./components/dashboard/HomePage";
+import WomenFashionPage from "./pages/WomenFashionPage";
 import routes from "tempo-routes";
 
 function App() {
@@ -9,6 +11,8 @@ function App() {
       <>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<HomePage />} />
+          <Route path="/women-fashion" element={<WomenFashionPage />} />
         </Routes>
         {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
       </>

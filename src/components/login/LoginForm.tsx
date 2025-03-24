@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -25,8 +26,9 @@ const LoginForm = ({
   onSocialLogin = () => {},
   onSignupClick = () => {},
 }: LoginFormProps) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("user@ptstore.com");
+  const [password, setPassword] = useState("password123");
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,23 +39,38 @@ const LoginForm = ({
     setIsLoading(true);
     setError("");
 
-    // Simulate API call
-    setTimeout(() => {
-      onLogin(email, password, remember);
-      setIsLoading(false);
-    }, 1000);
+    // Simple validation for demo purposes
+    if (email === "user@ptstore.com" && password === "password123") {
+      // Simulate API call
+      setTimeout(() => {
+        onLogin(email, password, remember);
+        setIsLoading(false);
+        navigate("/dashboard");
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        setError("Email hoặc mật khẩu không đúng");
+        setIsLoading(false);
+      }, 1000);
+    }
   };
 
   const handleGoogleLogin = () => {
     setIsLoading(true);
     onSocialLogin("google");
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate("/dashboard");
+    }, 1000);
   };
 
   const handleFacebookLogin = () => {
     setIsLoading(true);
     onSocialLogin("facebook");
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate("/dashboard");
+    }, 1000);
   };
 
   return (
@@ -73,7 +90,7 @@ const LoginForm = ({
           Đăng Nhập
         </h2>
         <p className="mt-2 text-base text-gray-600 font-medium">
-          Chào mừng quay trở lại với P&T Store
+          Thời trang & Mỹ phẩm cao cấp dành cho bạn
         </p>
       </motion.div>
 

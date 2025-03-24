@@ -97,12 +97,12 @@ const Home = () => {
           </motion.p>
         </header>
 
-        <div className="flex-grow flex flex-col lg:flex-row items-stretch justify-center gap-4 mx-auto w-full max-w-7xl">
+        <div className="flex-grow flex flex-col lg:flex-row items-stretch justify-center gap-4 mx-auto w-full max-w-7xl h-[525px]">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full lg:w-3/5 h-[600px] lg:h-auto rounded-2xl overflow-hidden shadow-xl hidden lg:block"
+            className="w-full lg:w-3/5 h-[525px] rounded-2xl overflow-hidden shadow-xl hidden lg:block"
           >
             <ProductShowcase />
           </motion.div>
