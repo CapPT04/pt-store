@@ -1,30 +1,55 @@
-# React + TypeScript + Vite
+# P&T Store - NextJS E-commerce Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Giới thiệu
 
-Currently, two official plugins are available:
+P&T Store là ứng dụng thương mại điện tử bán sản phẩm thời trang và mỹ phẩm cao cấp, được xây dựng trên nền tảng NextJS, TypeScript và TailwindCSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tính năng chính
 
-## Expanding the ESLint configuration
+- Giao diện người dùng hiện đại và đẹp mắt
+- Hệ thống đăng nhập và đăng ký
+- Trang sản phẩm thời trang nữ
+- Quản lý tài khoản người dùng
+- Dashboard quản lý
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Công nghệ sử dụng
 
-- Configure the top-level `parserOptions` property like this:
+- [Next.js](https://nextjs.org/) - React framework
+- [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Shadcn/ui](https://ui.shadcn.com/) - UI components
+- [Supabase](https://supabase.com/) - Backend as a Service
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Cài đặt và Chạy ứng dụng
+
+```bash
+# Cài đặt dependencies
+npm install
+
+# Chạy môi trường development
+npm run dev
+
+# Build ứng dụng
+npm run build
+
+# Chạy ứng dụng đã được build
+npm start
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Ứng dụng sẽ chạy tại [http://localhost:3000](http://localhost:3000)
+
+## Cấu trúc dự án
+
+```
+├── public/             # Static files
+├── src/                # Source code
+│   ├── app/            # App router pages
+│   ├── components/     # UI components
+│   ├── lib/            # Utility functions
+│   └── types/          # TypeScript types
+├── .eslintrc.json      # ESLint configuration
+├── next.config.js      # Next.js configuration
+├── package.json        # Project dependencies
+├── tailwind.config.js  # Tailwind CSS configuration
+└── tsconfig.json       # TypeScript configuration
+```

@@ -1,0 +1,95 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 60 14% 38%;
+
+        --card           : 0 0% 100%;
+        --card-foreground: 60 14% 38%;
+
+        --popover           : 0 0% 100%;
+        --popover-foreground: 60 14% 38%;
+
+        --primary           : 38 23% 51%;
+        --primary-foreground: 0 0% 100%;
+
+        --secondary           : 36 33% 68%;
+        --secondary-foreground: 60 14% 38%;
+
+        --muted           : 0 0% 86%;
+        --muted-foreground: 60 14% 38%;
+
+        --accent           : 36 33% 68%;
+        --accent-foreground: 60 14% 38%;
+
+        --destructive           : 0 84.2% 60.2%;
+        --destructive-foreground: 210 40% 98%;
+
+        --border: 36 33% 68%;
+        --input : 36 33% 68%;
+        --ring  : 38 23% 51%;
+
+        --radius: 0.5rem;
+    }
+
+    .dark {
+        --background: 60 14% 20%;
+        --foreground: 0 0% 86%;
+
+        --card           : 60 14% 25%;
+        --card-foreground: 0 0% 86%;
+
+        --popover           : 60 14% 25%;
+        --popover-foreground: 0 0% 86%;
+
+        --primary           : 38 23% 51%;
+        --primary-foreground: 0 0% 100%;
+
+        --secondary           : 36 33% 38%;
+        --secondary-foreground: 0 0% 86%;
+
+        --muted           : 60 14% 30%;
+        --muted-foreground: 36 33% 78%;
+
+        --accent           : 38 23% 41%;
+        --accent-foreground: 0 0% 86%;
+
+        --destructive           : 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 86%;
+
+        --border: 38 23% 41%;
+        --input : 38 23% 41%;
+        --ring  : 36 33% 68%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}

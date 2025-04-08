@@ -79,10 +79,10 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="relative w-full h-full overflow-hidden rounded-2xl bg-gradient-to-br from-pink-400 to-purple-600 shadow-2xl"
+      className="relative w-full h-full min-h-[525px] max-h-[600px] overflow-hidden rounded-2xl bg-gradient-to-br from-pink-400 to-purple-600 shadow-2xl"
     >
       {/* Main carousel */}
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-full min-h-[525px] max-h-[600px]">
         {products.map((product, index) => (
           <motion.div
             key={product.id}
@@ -129,7 +129,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({
       </div>
 
       {/* Navigation buttons */}
-      <div className="absolute inset-0 flex items-center justify-between p-4 h-[525px]">
+      <div className="absolute inset-0 flex items-center justify-between p-4 h-[full]">
         <button
           onClick={handlePrevious}
           className="p-3 text-white bg-black/40 rounded-full backdrop-blur-sm hover:bg-black/60 transition-all duration-300 transform hover:scale-110 shadow-lg"

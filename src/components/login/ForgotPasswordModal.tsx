@@ -19,8 +19,8 @@ interface ForgotPasswordModalProps {
 
 const ForgotPasswordModal = ({
   isOpen = true,
-  onClose = () => {},
-  onSubmit = () => {},
+  onClose = () => { },
+  onSubmit = () => { },
 }: ForgotPasswordModalProps) => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
