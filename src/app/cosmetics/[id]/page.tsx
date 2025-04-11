@@ -148,6 +148,25 @@ const CosmeticDetail = () => {
         image:
           "https://images.unsplash.com/photo-1594125311687-3b1b3eafa9f4?w=800&q=80",
       },
+      {
+        id: 6,
+        name: "Kem Chống Nắng SPF50",
+        price: "650.000₫",
+        image:
+          "https://images.unsplash.com/photo-1594125311687-3b1b3eafa9f4?w=800&q=80",
+      }, {
+        id: 7,
+        name: "Kem Chống Nắng SPF50",
+        price: "650.000₫",
+        image:
+          "https://images.unsplash.com/photo-1594125311687-3b1b3eafa9f4?w=800&q=80",
+      }, {
+        id: 8,
+        name: "Kem Chống Nắng SPF50",
+        price: "650.000₫",
+        image:
+          "https://images.unsplash.com/photo-1594125311687-3b1b3eafa9f4?w=800&q=80",
+      },
     ],
     customerReviews: [
       {
