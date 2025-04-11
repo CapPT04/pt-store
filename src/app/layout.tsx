@@ -5,7 +5,6 @@ import { Pacifico } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ScrollToTop from "@/components/ScrollToTop";
-import { TempoInit } from "./tempo-init";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -41,7 +40,6 @@ export default function RootLayout({
         <Script src="https://api.tempo.new/proxy-asset?url=https://storage.googleapis.com/tempo-public-assets/error-handling.js" />
         {children}
         <ScrollToTop />
-        <TempoInit />
       </body>
     </html>
   );

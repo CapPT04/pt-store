@@ -79,7 +79,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideLoginButton = false }) => {
                         </button>
                         <Link href="/">
                             <h1
-                                className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-fuchsia-500 to-amber-500 font-['Pacifico',_cursive] tracking-wide drop-shadow-[0_2px_2px_rgba(139,92,246,0.3)] transform hover:scale-105 transition-transform duration-300"
+                                className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 font-['Pacifico',_cursive] tracking-wide drop-shadow-[0_2px_2px_rgba(139,92,246,0.3)] transform hover:scale-105 transition-transform duration-300"
                                 style={{
                                     textShadow:
                                         "0 0 5px rgba(139,92,246,0.3), 0 0 10px rgba(236,72,153,0.2)",
@@ -103,7 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideLoginButton = false }) => {
                             >
                                 <div className="flex flex-col h-full">
                                     <div className="flex items-center justify-between p-4 border-b">
-                                        <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-amber-500">
+                                        <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-pink-500">
                                             Menu
                                         </h2>
                                         <button

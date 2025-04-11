@@ -108,11 +108,11 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
           // Reset particles that go off screen
           ...(particle.y < 0
             ? {
-                y: 100,
-                x: Math.random() * 100,
-                size: Math.random() * 4 + 1,
-                opacity: Math.random() * 0.5 + 0.1,
-              }
+              y: 100,
+              x: Math.random() * 100,
+              size: Math.random() * 4 + 1,
+              opacity: Math.random() * 0.5 + 0.1,
+            }
             : {}),
         })),
       );
@@ -123,240 +123,15 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
   }, []);
 
   return (
-    <div className="relative w-full">
-      <div
-        ref={containerRef}
-        className="relative bg-gradient-to-br from-pink-50 to-purple-50 rounded-3xl p-6 overflow-hidden shadow-xl w-full h-[650px] group"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onMouseMove={handleMouseMove}
-      >
-        {/* Floating particles effect */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          {particles.map((particle) => (
-            <motion.div
-              key={particle.id}
-              className="absolute rounded-full bg-white"
-              style={{
-                width: `${particle.size}px`,
-                height: `${particle.size}px`,
-                left: `${particle.x}%`,
-                top: `${particle.y}%`,
-                opacity: particle.opacity,
-                filter: "blur(1px)",
-                background:
-                  "linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,105,180,0.3))",
-              }}
-              animate={{
-                boxShadow: [
-                  "0 0 0px rgba(255, 105, 180, 0)",
-                  "0 0 2px rgba(255, 105, 180, 0.3)",
-                  "0 0 0px rgba(255, 105, 180, 0)",
-                ],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 2,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Enhanced decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <motion.div
-            className="absolute top-10 left-10 w-40 h-40 rounded-full bg-pink-200/30 blur-3xl"
-            animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.4, 0.3] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.div
-            className="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-purple-200/30 blur-3xl"
-            animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
-            }}
-          />
-          <motion.div
-            className="absolute top-1/3 left-1/2 w-32 h-32 rounded-full bg-fuchsia-200/20 blur-2xl"
-            animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-          <motion.div
-            className="absolute bottom-1/3 left-1/4 w-36 h-36 rounded-full bg-violet-200/20 blur-2xl"
-            animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
-            transition={{
-              duration: 9,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 3,
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-pink-100/10 to-purple-100/10 backdrop-blur-[2px] opacity-0 transition-opacity duration-700 group-hover:opacity-50" />
-        </div>
-
-        {/* Product image with enhanced effect */}
-        <div className="relative z-10 w-full h-full flex items-center justify-center overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentImageIndex}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{
-                opacity: 1,
-                scale: isZoomed ? 1.05 : 1,
-                x: isZoomed ? (mousePosition.x - 0.5) * 30 : 0,
-                y: isZoomed ? (mousePosition.y - 0.5) * 30 : 0,
-              }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{
-                opacity: { duration: 0.5 },
-                scale: {
-                  duration: 0.5,
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20,
-                },
-                x: {
-                  duration: 0.1,
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30,
-                },
-                y: {
-                  duration: 0.1,
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30,
-                },
-              }}
-              style={{
-                rotateX,
-                rotateY,
-                scale,
-                perspective: 1000,
-                transformStyle: "preserve-3d",
-              }}
-              className="w-full h-full flex items-center justify-center"
-            >
-              <div className="relative w-[550px] h-[600px] transform-gpu">
-                <Image
-                  src={images[currentImageIndex]}
-                  alt="Product image"
-                  fill
-                  className="object-contain drop-shadow-2xl"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority
-                />
-
-                {/* Enhanced shine effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent"
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: isZoomed ? 0.8 : 0,
-                    left: isZoomed ? "100%" : "-100%",
-                  }}
-                  transition={{
-                    duration: 1.2,
-                    repeat: isZoomed ? Infinity : 0,
-                    repeatDelay: 2,
-                  }}
-                />
-
-                {/* Second shine effect for more dynamic look */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-bl from-transparent via-pink-100/10 to-transparent"
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: isZoomed ? 0.6 : 0,
-                    right: isZoomed ? "100%" : "-100%",
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: isZoomed ? Infinity : 0,
-                    repeatDelay: 2.5,
-                    delay: 0.8,
-                  }}
-                />
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Magnifier button */}
-          <motion.button
-            className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm shadow-lg flex items-center justify-center z-20 border border-pink-200/50"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleMagnifierToggle}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-primary"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              {showMagnifier && <line x1="11" y1="8" x2="11" y2="14"></line>}
-              {showMagnifier && <line x1="8" y1="11" x2="14" y2="11"></line>}
-            </svg>
-          </motion.button>
-
-          {/* Magnifier lens */}
-          {showMagnifier && (
-            <motion.div
-              className="absolute w-32 h-32 rounded-full border-2 border-white/50 overflow-hidden shadow-lg z-30 pointer-events-none"
-              style={{
-                left: magnifierPosition.x - 64,
-                top: magnifierPosition.y - 64,
-                backgroundImage: `url(${images[currentImageIndex]})`,
-                backgroundSize: "200%",
-                backgroundPosition: `${-magnifierPosition.x * 2 + 64}px ${-magnifierPosition.y * 2 + 64}px`,
-                backgroundRepeat: "no-repeat",
-              }}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-            />
-          )}
-        </div>
-
-        {/* Image indicators */}
-        <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2">
-          {images.map((_, index) => (
-            <motion.button
-              key={index}
-              className={`h-2 rounded-full transition-all ${index === currentImageIndex ? "w-8 bg-primary" : "w-2 bg-gray-300"}`}
-              onClick={() => setCurrentImageIndex(index)}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Thumbnail images */}
-      <div className="mt-4 flex gap-3 justify-center">
+    <div className="relative w-full flex flex-col md:flex-row gap-4">
+      {/* Thumbnail images - moved to left side */}
+      <div className="md:w-20 flex flex-row md:flex-col gap-2 justify-center md:justify-between md:h-[650px]">
         {images.map((image, index) => (
           <motion.button
             key={index}
-            className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${index === currentImageIndex ? "border-primary ring-2 ring-primary/30 scale-105" : "border-gray-200"}`}
+            className={`relative w-14 h-14 md:w-16 md:h-20 rounded-lg overflow-hidden border-2 transition-all ${index === currentImageIndex ? "border-violet-600 ring-2 ring-violet-600/30 scale-105" : "border-gray-200"}`}
             onClick={() => setCurrentImageIndex(index)}
-            whileHover={{ scale: 1.1, borderColor: "rgba(236, 72, 153, 0.5)" }}
+            whileHover={{ scale: 1.1, borderColor: "rgba(124, 58, 237, 0.5)" }}
             whileTap={{ scale: 0.95 }}
           >
             <Image
@@ -364,11 +139,11 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
               alt={`Product view ${index + 1}`}
               fill
               className="object-cover"
-              sizes="80px"
+              sizes="64px"
             />
             {index === currentImageIndex && (
               <motion.div
-                className="absolute inset-0 bg-primary/10 backdrop-blur-[1px]"
+                className="absolute inset-0 bg-violet-600/10 backdrop-blur-[1px]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -376,6 +151,190 @@ const ProductImage: React.FC<ProductImageProps> = ({ images }) => {
             )}
           </motion.button>
         ))}
+      </div>
+
+      {/* Main product image container */}
+      <div className="flex-1">
+        <div
+          ref={containerRef}
+          className="relative bg-gradient-to-br from-pink-100 to-purple-100 rounded-3xl overflow-hidden shadow-xl w-full h-[650px] group"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onMouseMove={handleMouseMove}
+        >
+          {/* Floating particles effect */}
+          <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+            {particles.map((particle) => (
+              <motion.div
+                key={particle.id}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: `${particle.size}px`,
+                  height: `${particle.size}px`,
+                  left: `${particle.x}%`,
+                  top: `${particle.y}%`,
+                  opacity: particle.opacity,
+                  filter: "blur(1px)",
+                  background:
+                    "linear-gradient(to right, rgba(255,255,255,0.8), rgba(219,39,119,0.3))",
+                }}
+                animate={{
+                  boxShadow: [
+                    "0 0 0px rgba(219, 39, 119, 0)",
+                    "0 0 2px rgba(219, 39, 119, 0.3)",
+                    "0 0 0px rgba(219, 39, 119, 0)",
+                  ],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 2,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Enhanced decorative elements */}
+          <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <motion.div
+              className="absolute top-10 left-10 w-40 h-40 rounded-full bg-pink-300/40 blur-3xl"
+              animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.4, 0.3] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-purple-300/40 blur-3xl"
+              animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
+            />
+            <motion.div
+              className="absolute top-1/3 left-1/2 w-32 h-32 rounded-full bg-fuchsia-300/30 blur-2xl"
+              animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
+              transition={{
+                duration: 7,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
+            />
+            <motion.div
+              className="absolute bottom-1/3 left-1/4 w-36 h-36 rounded-full bg-violet-300/30 blur-2xl"
+              animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
+              transition={{
+                duration: 9,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 3,
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-200/20 to-purple-200/20 backdrop-blur-[2px] opacity-0 transition-opacity duration-700 group-hover:opacity-50" />
+          </div>
+
+          {/* Product image with enhanced effect */}
+          <div className="relative z-10 w-full h-full flex items-center justify-center overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentImageIndex}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{
+                  opacity: 1,
+                  scale: isZoomed ? 1.05 : 1,
+                  x: isZoomed ? (mousePosition.x - 0.5) * 30 : 0,
+                  y: isZoomed ? (mousePosition.y - 0.5) * 30 : 0,
+                }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{
+                  opacity: { duration: 0.5 },
+                  scale: {
+                    duration: 0.5,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                  },
+                  x: {
+                    duration: 0.1,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                  },
+                  y: {
+                    duration: 0.1,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                  },
+                }}
+                style={{
+                  rotateX,
+                  rotateY,
+                  scale,
+                  perspective: 1000,
+                  transformStyle: "preserve-3d",
+                }}
+                className="w-full h-full flex items-center justify-center"
+              >
+                <div className="relative w-full h-full transform-gpu">
+                  <Image
+                    src={images[currentImageIndex]}
+                    alt="Product image"
+                    fill
+                    className="object-cover drop-shadow-2xl"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority
+                  />
+
+                  {/* Enhanced shine effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent"
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: isZoomed ? 0.8 : 0,
+                      left: isZoomed ? "100%" : "-100%",
+                    }}
+                    transition={{
+                      duration: 1.2,
+                      repeat: isZoomed ? Infinity : 0,
+                      repeatDelay: 2,
+                    }}
+                  />
+
+                  {/* Second shine effect for more dynamic look */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-bl from-transparent via-pink-100/10 to-transparent"
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: isZoomed ? 0.6 : 0,
+                      right: isZoomed ? "100%" : "-100%",
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: isZoomed ? Infinity : 0,
+                      repeatDelay: 2.5,
+                      delay: 0.8,
+                    }}
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Image indicators */}
+          <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2">
+            {images.map((_, index) => (
+              <motion.button
+                key={index}
+                className={`h-2 rounded-full transition-all ${index === currentImageIndex ? "w-8 bg-violet-600" : "w-2 bg-gray-300"}`}
+                onClick={() => setCurrentImageIndex(index)}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

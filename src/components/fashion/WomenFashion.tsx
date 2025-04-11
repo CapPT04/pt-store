@@ -392,7 +392,7 @@ const WomenFashion = () => {
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`h-4 w-4 ${i < Math.floor(product.rating) ? "text-amber-400 fill-amber-400" : "text-gray-300"}`}
+                          className={`h-4 w-4 ${i < Math.floor(product.rating) ? "text-pink-400 fill-pink-400" : "text-gray-300"}`}
                         />
                       ))}
                       <span className="text-xs text-gray-600 ml-1">

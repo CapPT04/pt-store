@@ -762,7 +762,7 @@ const CosmeticsPage = () => {
                           </span>
                         )}
                         {product.isBestseller && (
-                          <span className="px-2 py-1 bg-amber-500 text-white text-xs font-medium rounded-full shadow-sm">
+                          <span className="px-2 py-1 bg-pink-500 text-white text-xs font-medium rounded-full shadow-sm">
                             Bán chạy
                           </span>
                         )}
@@ -816,7 +816,7 @@ const CosmeticsPage = () => {
                           {product.brand}
                         </p>
                         <div className="flex items-center gap-1 mb-3">
-                          <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                          <Star className="h-4 w-4 fill-pink-400 text-pink-400" />
                           <span className="text-sm font-medium text-gray-700">
                             {product.rating}
                           </span>

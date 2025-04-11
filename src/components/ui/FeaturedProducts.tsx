@@ -72,8 +72,8 @@ const FeaturedProducts = ({ products, activeCategory, onCategoryChange }: Featur
                             key={category}
                             onClick={() => onCategoryChange(category)}
                             className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
-                                    ? "bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white shadow-md"
-                                    : "bg-white/80 text-slate-700 hover:bg-violet-100/50 border border-violet-100/50"
+                                ? "bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white shadow-md"
+                                : "bg-white/80 text-slate-700 hover:bg-violet-100/50 border border-violet-100/50"
                                 }`}
                         >
                             {category === "all" ? "Tất Cả" : category}
@@ -127,7 +127,7 @@ const FeaturedProducts = ({ products, activeCategory, onCategoryChange }: Featur
                                         {product.category}
                                     </span>
                                     <div className="flex items-center">
-                                        <Star className="h-4 w-4 text-amber-400 fill-amber-400" />
+                                        <Star className="h-4 w-4 text-pink-400 fill-pink-400" />
                                         <span className="text-xs text-slate-600 ml-1">
                                             {product.rating} ({product.reviews})
                                         </span>

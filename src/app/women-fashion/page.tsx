@@ -53,7 +53,7 @@ const WomenFashionPage = () => {
             description: "Tỏa sáng với những thiết kế nhẹ nhàng, thanh lịch",
             imageUrl:
                 "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=1200&q=80",
-            accent: "from-amber-400 to-rose-500",
+            accent: "from-pink-400 to-rose-500",
         },
         {
             id: 2,
@@ -509,7 +509,7 @@ const WomenFashionPage = () => {
                                             {categories.find((c) => c.id === product.category)?.name}
                                         </span>
                                         <div className="flex items-center">
-                                            <Star className="h-3 w-3 text-amber-400 fill-amber-400" />
+                                            <Star className="h-3 w-3 text-pink-400 fill-pink-400" />
                                             <span className="text-xs text-slate-600 ml-1">
                                                 {product.rating}
                                             </span>
@@ -620,7 +620,7 @@ const WomenFashionPage = () => {
                                                                     {[...Array(5)].map((_, i) => (
                                                                         <Star
                                                                             key={i}
-                                                                            className={`h-4 w-4 ${i < Math.floor(product.rating) ? "text-amber-400 fill-amber-400" : "text-slate-300"}`}
+                                                                            className={`h-4 w-4 ${i < Math.floor(product.rating) ? "text-pink-400 fill-pink-400" : "text-slate-300"}`}
                                                                         />
                                                                     ))}
                                                                 </div>

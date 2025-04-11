@@ -17,7 +17,7 @@ interface TestimonialsProps {
 
 const Testimonials = ({ testimonials }: TestimonialsProps) => {
     return (
-        <section className="py-16 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-amber-100 via-violet-50 to-sky-100">
+        <section className="py-16 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-pink-100 via-violet-50 to-sky-100">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-12">
                     <motion.span
@@ -72,8 +72,8 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
                                             <Star
                                                 key={i}
                                                 className={`h-4 w-4 ${i < testimonial.rating
-                                                        ? "text-amber-400 fill-amber-400"
-                                                        : "text-slate-300"
+                                                    ? "text-pink-400 fill-pink-400"
+                                                    : "text-slate-300"
                                                     }`}
                                             />
                                         ))}
